@@ -16,16 +16,18 @@ class Dashboard extends CI_Controller{
     }
     public function index()
     {
-        $users = $this->User_model->get_all_users();
+            $users = $this->User_model->get_all_users();
             $inten = $this->User_model->get_user_employment('intern');
             $permanent = $this->User_model->get_user_employment('permanent');
+            $contractor = $this->User_model->get_user_employment('contractor');
             $late_intern = $this->User_model->get_late_intern();
             $late_permanent = $this->User_model->get_late_permanent();
+            $late_contractor= $this->User_model->get_late_contractor();
 
             if ($users) {
-                $data['users'] = ['status' => 'success', 'data' => $users, 'intern' => $inten, 'permanent' => $permanent, 'late_intern' => $late_intern, 'late_permanent' => $late_permanent];
+                $data['users'] = ['status' => 'success', 'data' => $users, 'intern' => $inten, 'permanent' => $permanent,'contractor'=>$contractor, 'late_intern' => $late_intern, 'late_permanent' => $late_permanent,'late_contractor' => $late_contractor];
             } else {
-                $data['user'] = ['status' => 'success', 'data' => $users, 'intern' => $inten, 'permanent' => $permanent, 'late_intern' => $late_intern, 'late_permanent' => $late_permanent];
+                $data['users'] = ['status' => 'success', 'data' => $users, 'intern' => $inten, 'permanent' => $permanent,'contractor'=>$contractor, 'late_intern' => $late_intern, 'late_permanent' => $late_permanent,'late_contractor' => $late_contractor];
             }
             $this->load->view('pages/admin/dashboard',$data);
     }

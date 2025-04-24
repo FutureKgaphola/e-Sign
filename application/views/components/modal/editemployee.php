@@ -41,6 +41,7 @@
           <select id="empStatus" name="empStatus" class="form-select form-select-sm" required aria-label="Employment Type">
             <option value="permanent">Permanent</option>
             <option value="intern">Intern</option>
+            <option value="contractor">Contractor</option>
           </select>
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

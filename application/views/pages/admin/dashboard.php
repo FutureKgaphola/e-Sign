@@ -52,22 +52,22 @@ require_once BASEPATH . '/helpers/url_helper.php';
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Total users : <?= count( isset($users['data']) ? $users['data'] :[] ) ?></div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                <div class="card-footer d-flex flex-wrap gap-1">
                                     <span class="small text-white ">As Recorded</span>
                                     <span class="badge text-bg-warning">Permanent : <?= count(isset($users['permanent']) ? $users['permanent'] : []) ?></span>
                                     <span class="badge text-bg-light">Interns : <?= count(isset($users['intern']) ? $users['intern'] :[]) ?></span>
-
+                                    <span class="badge text-bg-light">Interns : <?= count(isset($users['contractor']) ? $users['contractor'] :[]) ?></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Late Today : <?=count(isset($users['late_intern']) ? $users['late_intern'] : []) + count(isset($users['late_permanent']) ? $users['late_permanent'] :[])  ?></div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                <div class="card-body">Late Today : <?=count(isset($users['late_intern']) ? $users['late_intern'] : []) + count(isset($users['late_permanent']) ? $users['late_permanent'] :[]) +count(isset($users['late_contractor']) ? $users['late_contractor'] :[])  ?></div>
+                                <div class="card-footer d-flex flex-wrap gap-1">
                                     <span class="small text-white">As Recorded</span>
                                     <span class="badge text-bg-primary">Permanent : <?= count(isset($users['late_permanent']) ? $users['late_permanent'] :[]) ?></span>
                                     <span class="badge text-bg-light">Interns : <?= count(isset($users['late_intern']) ? $users['late_intern'] : []) ?></span>
-
+                                    <span class="badge text-bg-light">Contractor : <?= count(isset($users['late_contractor']) ? $users['late_contractor'] : []) ?></span>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@ require_once BASEPATH . '/helpers/url_helper.php';
                                                     <?php else: ?>
                                                     <span class="badge text-bg-danger">Awaiting Sign In</span>
                                                     <?php endif; ?>
-                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                    <a href="User/print_file/<?= $emp['emp_no'] ?>"><i class="fa fa-download" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
     

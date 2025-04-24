@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class User extends CI_Controller {
 public function __construct() {
         parent::__construct();
@@ -120,6 +121,16 @@ public function __construct() {
         $userId = $this->input->post('usef');
         $this->User_model->delete_user($userId);
         redirect('/dashboard');
+    }
+
+    public function print_file($userId=null) {
+
+        if($userId==null) return show_404();
+        if (!ctype_digit($userId) || strlen($userId) !== 6 || $userId=="000000") return redirect('/dashboard');
+        $user = $this->User_model->get_user_History($userId);
+        $data['records']= $user;
+        $this->load->view('pages/printout',$data);
+        
     }
 }
 

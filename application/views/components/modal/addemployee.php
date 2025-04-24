@@ -50,6 +50,7 @@
             <option selected>---</option>
             <option value="permanent">Permanent</option>
             <option value="intern">Intern</option>
+            <option value="contractor">Contractor</option>
           </select>
         
       </div>

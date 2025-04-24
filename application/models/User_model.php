@@ -13,6 +13,37 @@ class User_model extends CI_Model
         $this->pdo = $pdoService->getPDO();
     }
 
+    public function create_Admin($username,$password,$emailAdmin)
+    {
+        if(is_null($username) || is_null($password) || is_null($emailAdmin)){
+            return false;
+        }
+        $emailAdmin = filter_var($emailAdmin, FILTER_SANITIZE_EMAIL);
+        if(!filter_var($emailAdmin, FILTER_VALIDATE_EMAIL)) return false;
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->pdo->prepare("INSERT INTO Admins (username, pass_word,emailAdmin) VALUES (?, ?, ?)");
+        $success = $stmt->execute([$username, $hashedPassword,$emailAdmin]);
+        if ($success) {
+            return true;
+        }
+        return false;
+    }
+
+    public function login_Admin($username, $password)
+    {
+        if(is_null($username) || is_null($password)){
+            return false;
+        }
+        $stmt = $this->pdo->prepare("SELECT * FROM Admins WHERE username = ?");
+        $stmt->execute([$username]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($admin && password_verify($password, $admin['pass_word'])) {
+            return true;
+        }
+        return false;
+    }
+
     public function get_all_users()
     {
         $sql = "SELECT * FROM Employees";
@@ -26,6 +57,14 @@ class User_model extends CI_Model
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get_user_History($id)
+    {
+        $sql = "SELECT * FROM employees_backup WHERE emp_no = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function get_user_employment($type='permanent')
@@ -48,6 +87,13 @@ class User_model extends CI_Model
         $sql = "SELECT * FROM Employees WHERE attendance = :attendence AND empStatus = :empStatus";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['attendence' => 'absent', 'empStatus' => 'permanent']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function get_late_contractor()
+    {
+        $sql = "SELECT * FROM Employees WHERE attendance = :attendence AND empStatus = :empStatus";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['attendence' => 'absent', 'empStatus' => 'contractor']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function update_user($data) {

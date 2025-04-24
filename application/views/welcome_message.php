@@ -166,7 +166,7 @@ require_once BASEPATH . '/helpers/url_helper.php';
 						</div>
 						<div class="mb-3">
 							<label for="exampleInputPassword1" class="form-label">Password</label>
-							<input id='userPass' name="password" type="password" class="form-control"
+							<input id='pass_word' name="pass_word" type="password" class="form-control"
 								id="exampleInputPassword1">
 						</div>
 
