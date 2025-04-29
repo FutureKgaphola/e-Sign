@@ -56,7 +56,7 @@ require_once BASEPATH . '/helpers/url_helper.php';
                                     <span class="small text-white ">As Recorded</span>
                                     <span class="badge text-bg-warning">Permanent : <?= count(isset($users['permanent']) ? $users['permanent'] : []) ?></span>
                                     <span class="badge text-bg-light">Interns : <?= count(isset($users['intern']) ? $users['intern'] :[]) ?></span>
-                                    <span class="badge text-bg-light">Interns : <?= count(isset($users['contractor']) ? $users['contractor'] :[]) ?></span>
+                                    <span class="badge text-bg-light">Contractors : <?= count(isset($users['contractor']) ? $users['contractor'] :[]) ?></span>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ require_once BASEPATH . '/helpers/url_helper.php';
                                     <span class="small text-white">As Recorded</span>
                                     <span class="badge text-bg-primary">Permanent : <?= count(isset($users['late_permanent']) ? $users['late_permanent'] :[]) ?></span>
                                     <span class="badge text-bg-light">Interns : <?= count(isset($users['late_intern']) ? $users['late_intern'] : []) ?></span>
-                                    <span class="badge text-bg-light">Contractor : <?= count(isset($users['late_contractor']) ? $users['late_contractor'] : []) ?></span>
+                                    <span class="badge text-bg-light">Contractors : <?= count(isset($users['late_contractor']) ? $users['late_contractor'] : []) ?></span>
                                 </div>
                             </div>
                         </div>
